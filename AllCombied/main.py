@@ -60,7 +60,7 @@ def process_folder(input_subfolder, output_subfolder):
         for svg_file in svg_files:
             input_path = os.path.join(input_subfolder, svg_file)
             base_name = os.path.splitext(svg_file)[0]  # e.g., "3" from "3.svg"
-            output_filename = f"hape_{base_name}.png"
+            output_filename = f"shape_{base_name}.png"
             output_path = os.path.join(output_subfolder, output_filename)
 
             futures.append(executor.submit(convert_svg_to_png, input_path, output_path))
