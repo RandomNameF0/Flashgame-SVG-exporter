@@ -148,8 +148,9 @@ def split_and_save(img, original_filepath, shape_folder):
     os.makedirs(left_output_dir, exist_ok=True)
     os.makedirs(right_output_dir, exist_ok=True)
 
-    left_img.save(os.path.join(left_output_dir, f"{name}_left.png"))
-    right_img.save(os.path.join(right_output_dir, f"{name}_right.png"))
+    # DONT PUT A FUCKING LEFT AND RIGHT UNDERSCORE NAME
+    left_img.save(os.path.join(left_output_dir, f"{name}.png"))
+    right_img.save(os.path.join(right_output_dir, f"{name}.png"))
 
 
 
