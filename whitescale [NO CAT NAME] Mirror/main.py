@@ -87,11 +87,15 @@ def get_scale_factor(input_svg_path):
 
 
 def scale_png(png_filepath):
+    from pathlib import Path
+    from PIL import ImageOps
+
+    # Open original image
     with Image.open(png_filepath) as img:
-        # Resize the image
         width, height = img.size
         target_size = 2000
 
+        # Scale proportionally
         if width > height:
             scale_factor = target_size / width if width > target_size else 1
         else:
@@ -111,11 +115,18 @@ def scale_png(png_filepath):
             img = white.convert("RGBA")
 
         # Save original
-        #img.save(png_filepath)
+        img.save(png_filepath)
 
-        # Create and save mirrored version
+        # Create mirrored image
         mirrored_img = ImageOps.mirror(img)
-        mirrored_path = png_filepath.replace(".png", "_mirrored.png")
+
+        # Prepare mirrored folder path
+        original_path = Path(png_filepath)
+        mirrored_folder = original_path.parent / "mirrored"
+        mirrored_folder.mkdir(parents=True, exist_ok=True)
+
+        # Save mirrored image inside mirrored folder
+        mirrored_path = mirrored_folder / original_path.name
         mirrored_img.save(mirrored_path)
 
 
